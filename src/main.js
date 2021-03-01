@@ -4,7 +4,8 @@ import router from './router'
 import store from './store'
 import './assets/basecss/base.css'
 import './assets/moudel/moudel.css'
-import { Button, Input, Message } from 'element-ui'
+import { Button, Input, Message, MessageBox } from 'element-ui'
+
 import dateFormat from './util/dateFormat/dateFormat'
 import './filter/dateFormat/dateFilter'
 
@@ -13,6 +14,7 @@ Vue.use(Button)
 Vue.use(Input)
 Vue.use(dateFormat)
 
+Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$message = Message
 
 new Vue({

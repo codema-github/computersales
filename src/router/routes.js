@@ -42,8 +42,12 @@ const routes = [
             {
                 path: '/addStaff',
                 name: 'AddStaff',
-                component: () => import(/* webpackChunkName: "addStaff" */ '../views/management/staff/children/AddStaff.vue'),
-                meta: { type: 'add' }
+                component: () => import(/* webpackChunkName: "addStaff" */ '../views/management/staff/children/AddStaff.vue')
+            },
+            {
+                path: '/checkStaff',
+                name: 'CheckStaff',
+                component: () => import(/* webpackChunkName: "checkStaff" */ '../views/management/staff/children/CheckStaff.vue')
             },
             {
                 path: '/order',

@@ -65,8 +65,8 @@
                 label="状态"
                 width="100">
                     <template slot-scope="scope">
-                        <el-tag v-if="scope.row.status === 1" type="success">在职</el-tag>
-                        <el-tag v-if="scope.row.status === 0" type="danger">离职</el-tag>
+                        <el-tag v-if="scope.row.status" type="success">在职</el-tag>
+                        <el-tag v-else type="danger">离职</el-tag>
                     </template>
                 </el-table-column>
                 <el-table-column
@@ -76,7 +76,7 @@
                     <template slot-scope="scope">
                         <el-button @click="handleCheck(scope.row)" type="text" size="small">查看</el-button>
                         <el-button @click="handleEdit(scope.row)" type="text" size="small">编辑</el-button>
-                        <el-button @click="handleDelete(scope.row.staffId)" type="text" size="small">删除</el-button>
+                        <el-button @click="handleDelete(scope.row)" type="text" size="small">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -127,9 +127,10 @@ export default {
                     age: '2',
                     telphone: '2',
                     salary: '2',
-                    joinTime: 10000000,
-                    status: 1,
-                    idCard: '430281200002253635'
+                    joinTime: new Date(),
+                    status: true,
+                    idCard: '430281200002253635',
+                    job: [0, 1]
                 },
                 {
                     staffId: 12,
@@ -139,14 +140,21 @@ export default {
                     telphone: '22',
                     salary: '2t',
                     joinTime: 10000000,
-                    status: 0,
-                    idCard: '430281200002253635'
+                    status: false,
+                    idCard: '430281200002253635',
+                    job: [1, 0]
                 }
             ]
             // addDialogVisible: false
         }
     },
+    created () {
+        this.loadStaffs()
+    },
     methods: {
+        loadStaffs () {
+            // this.staffList =
+        },
         handleSizeChange (val) {
             console.log('当前页大小：' + val)
             this.querryInfo.pageSize = val
@@ -154,6 +162,7 @@ export default {
         handleCurrentChange (val) {
             console.log('当前页码：' + val)
             this.querryInfo.currentPage = val
+            this.loadStaffs()
         },
         showAdd () {
             // this.addDialogVisible = true
@@ -169,7 +178,7 @@ export default {
         },
         handleCheck (row) {
             this.$router.push({
-                name: 'AddStaff',
+                name: 'CheckStaff',
                 params: { formData: row }
             })
         },
@@ -178,9 +187,33 @@ export default {
                 name: 'AddStaff',
                 params: { formData: row }
             })
+            console.log(row)
         },
-        handleDelete (id) {
-            console.log(id)
+        handleDelete (row) {
+            console.log(row.status)
+            if (row.status) {
+                this.$message({
+                    message: '该员工在职，只能删除离职员工',
+                    type: 'warning'
+                })
+            } else {
+                this.$confirm('此操作将永久删除该员工, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    console.log(row)
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    })
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    })
+                })
+            }
         }
     }
 }

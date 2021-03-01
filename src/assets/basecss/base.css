@@ -1,3 +1,7 @@
+/* 最小宽度1024 */
+/* @media only screen and (max-width:1024px){
+	在老式浏览器中被解析为media = "only"，因为没有一个叫做only的设备，所以实际上老式浏览器不会应用里面的样式
+} */
 html, body, #app{
   height: 100%;
   padding: 0;

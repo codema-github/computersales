@@ -37,6 +37,19 @@
                     @change="handleChangeJob">
                     </el-cascader>
                 </el-form-item>
+                <el-form-item label='状态' v-if='$route.params.formData'>
+                    <el-tooltip :content="statusText" placement="right">
+                        <el-switch
+                        v-model="addForm.status"
+                        :active-value = true
+                        :inactive-value= false
+                        active-color="#13ce66"
+                        inactive-color="#ff4949"
+                        @change = 'changeStatus'>
+                        </el-switch>
+                    </el-tooltip>
+
+                </el-form-item>
                 <el-form-item label="月薪" prop="salary">
                     <el-input clearable type="text" v-model="addForm.salary" autocomplete="off" placeholder="单位/元"></el-input>
                 </el-form-item>
@@ -56,7 +69,7 @@
 </template>
 
 <script>
-import { Card, Cascader, DatePicker, Form, FormItem, PageHeader, Radio } from 'element-ui'
+import { Card, Cascader, DatePicker, Form, FormItem, PageHeader, Radio, Switch, Tooltip } from 'element-ui'
 import Breadcrumb from '../../../../components/common/breadcrumb/Breadcrumb.vue'
 export default {
     name: 'AddStaff',
@@ -70,6 +83,8 @@ export default {
         'el-radio': Radio,
         'el-card': Card,
         'el-page-header': PageHeader,
+        'el-switch': Switch,
+        'el-tooltip': Tooltip,
         Breadcrumb
     },
     created () {
@@ -166,22 +181,22 @@ export default {
             },
             options: [
                 {
-                    value: 'yinxiaobu',
+                    value: 0,
                     label: '营销部',
                     children: [{
-                        value: 'jingli',
+                        value: 0,
                         label: '经理'
                     },
                     {
-                        value: 'kefu',
+                        value: 1,
                         label: '客服'
                     }]
                 },
                 {
-                    value: 'caiwubu',
+                    value: 1,
                     label: '财务部',
                     children: [{
-                        value: 'jingli',
+                        value: 0,
                         label: '经理'
                     }]
                 }
@@ -204,6 +219,7 @@ export default {
                     const date = this.toTime(this.addForm.joinTime)
                     this.addForm.joinTime = date
                     console.log(this.addForm)
+                    this.$router.push('/staff')
                 } else {
                     console.log('验证失败')
                 }
@@ -212,6 +228,18 @@ export default {
         cancel () {
             this.$router.push('/staff')
             this.$refs.addFormRef.resetFields()
+        },
+        changeStatus () {
+            console.log(this.addForm.status)
+        }
+    },
+    computed: {
+        statusText () {
+            if (this.addForm.status) {
+                return '在职'
+            } else {
+                return '离职'
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-<!-- 查看和修改页面 -->
+<!-- 查看页面 -->
 <template>
     <div class="checkStaff_container">
         <div class="container_header">
@@ -6,7 +6,7 @@
             <el-page-header @back="$router.back(-1)"/>
         </div>
         <el-card class='box-card'>
-            <el-form class="form" ref="addFormRef" label-position='right' size="mini" :model="addForm" status-icon :rules="rules" label-width="80px" >
+            <el-form disabled class="form" ref="addFormRef" label-position='right' size="mini" :model="addForm" status-icon label-width="80px" >
                 <el-form-item label="工号" prop="staffId">
                     <el-input clearable type="text" v-model.number="addForm.staffId" autocomplete="off"></el-input>
                 </el-form-item>
@@ -32,9 +32,8 @@
                 <el-form-item label="职位" prop="job">
                     <el-cascader
                     v-model="addForm.job"
-                    :options="options"
                     :props="{ expandTrigger: 'hover' }"
-                    @change="handleChangeJob">
+                    >
                     </el-cascader>
                 </el-form-item>
                 <el-form-item label="月薪" prop="salary">
@@ -45,10 +44,6 @@
                 </el-form-item>
                 <el-form-item label="身份证" prop="idCard">
                     <el-input clearable type="text" v-model="addForm.idCard" autocomplete="true"></el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="add">添加</el-button>
-                    <el-button @click="cancel">取消</el-button>
                 </el-form-item>
             </el-form>
         </el-card>
@@ -73,50 +68,24 @@ export default {
         Breadcrumb
     },
     created () {
-        this.title = this.$route.params.type === 'check' ? '查看信息' : this.$route.params.type === 'edit' ? '修改信息' : '添加员工'
-
-        if (this.$route.params.formData) {
-            this.loadAddForm()
-            console.log(this.addForm)
-            console.log(this.title)
-        }
-        /* this.$nextTick(() => {
-            this.title = (this.$route.meta.type === 'check' ? '查看信息' : this.$route.meta.type === 'edit') ? '修改信息' : '添加员工'
-        }) */
+        this.loadAddForm()
     },
     data () {
         return {
+            headTitles: ['员工管理', '查看信息']
         }
     },
     methods: {
         loadAddForm () {
             const data = this.$route.params.formData
             this.addForm = { ...data }
-        },
-        handleChangeJob (val) {
-            console.log(val)
-        },
-        add () {
-            this.$refs.addFormRef.validate((valid) => {
-                if (valid) {
-                    console.log(valid)
-                    // 网络请求
-                    const date = this.toTime(this.addForm.joinTime)
-                    this.addForm.joinTime = date
-                    console.log(this.addForm)
-                } else {
-                    console.log('验证失败')
-                }
-            })
-        },
-        cancel () {
-            this.$router.push('/staff')
-            this.$refs.addFormRef.resetFields()
         }
     }
 }
 </script>
 
 <style lang='less' scoped>
-
+.form{
+    width: 300px;
+}
 </style>
