@@ -3,23 +3,23 @@
     <div class="login_container">
         <div class="login_box">
             <div class="login_header">
-              <i class="el-icon-user"></i>
-              <span>后台管理系统</span>
+                <i class="el-icon-user"></i>
+                <span>后台管理系统</span>
             </div>
             <el-form :model="loginForm" ref="loginFormRef" :rules="rules" label-width="0" class="loginForm">
-              <el-form-item prop="username">
-                  <el-input type='text' v-model="loginForm.username" prefix-icon="el-icon-user" clearable></el-input>
-              </el-form-item>
-              <el-form-item prop="password">
+                <el-form-item prop="username">
+                    <el-input type='text' v-model="loginForm.username" prefix-icon="el-icon-user" clearable></el-input>
+                </el-form-item>
+                <el-form-item prop="password">
                 <el-input type="password" v-model="loginForm.password" prefix-icon="el-icon-lock" show-password clearable>
-                  <i slot="suffix"></i>
+                    <i slot="suffix"></i>
                 </el-input>
-              </el-form-item>
-              <el-form-item class="btns">
+                </el-form-item>
+                <el-form-item class="btns">
                 <el-button type="primary" @click="submit">提交</el-button>
                 <el-button @click="reset">重置</el-button>
-              </el-form-item>
-          </el-form>
+                </el-form-item>
+            </el-form>
         </div>
     </div>
 </template>
@@ -77,46 +77,46 @@ export default {
         height: 100%;
         background-color: #000;
         .login_box{
-          width: 360px;
-          height: 300px;
-          background-color: #fff;
-          border-radius: 3%;
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%,-50%);
-          .login_header{
-              text-align: center;
-              span,.el-icon-user{
-                  position: absolute;
-                  left: 50%;
-                  transform: translate(-50%,-50%);
-              }
-              .el-icon-user{
-                  font-size: 110px;
-                  border:1px solid #000;
-                  border-radius: 50%;
-                  box-shadow: 0 10px 10px #000;
-                  background-color: #fff;
-              }
-              span{
-                  top: 88px;
-                  font-size: 22px
-              }
-          }
-          .loginForm{
-              width: 100%;
-              position: absolute;
-              left: 50%;
-              bottom: 0;
-              transform: translate(-50%,0);
-              box-sizing: border-box;
-              padding: 0px 25px;
-              .btns{
-                  display: flex;
-                  justify-content:flex-end;
-              }
-          }
+            width: 360px;
+            height: 300px;
+            background-color: #fff;
+            border-radius: 3%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            .login_header{
+                text-align: center;
+                span,.el-icon-user{
+                    position: absolute;
+                    left: 50%;
+                    transform: translate(-50%,-50%);
+                }
+                .el-icon-user{
+                    font-size: 110px;
+                    border:1px solid #000;
+                    border-radius: 50%;
+                    box-shadow: 0 10px 10px #000;
+                    background-color: #fff;
+                }
+                span{
+                    top: 88px;
+                    font-size: 22px
+                }
+            }
+            .loginForm{
+                width: 100%;
+                position: absolute;
+                left: 50%;
+                bottom: 0;
+                transform: translate(-50%,0);
+                box-sizing: border-box;
+                padding: 0px 25px;
+                .btns{
+                    display: flex;
+                    justify-content:flex-end;
+                }
+            }
         }
     }
 </style>

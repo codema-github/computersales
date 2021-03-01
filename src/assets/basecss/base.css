@@ -3,3 +3,12 @@ html, body, #app{
   padding: 0;
   margin: 0;
 }
+.el-pagination{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+/* el-card css样式 */
+.box-card{
+  margin-top: 20px;
+}
